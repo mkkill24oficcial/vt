@@ -130,9 +130,9 @@
     .producto img {
       width: 100%;
       height: auto;
-      max-height: 250px; /* Limita la altura máxima */
-      min-height: 200px; /* Limita la altura mínima */
-      object-fit: cover; /* Asegura que la imagen se ajuste sin distorsionarse */
+      max-height: 250px; 
+      min-height: 200px; 
+      object-fit: cover;
       border-radius: 10px;
       transition: transform 0.5s ease, box-shadow 0.5s ease;
       cursor: pointer;
@@ -149,7 +149,6 @@
       color: gold;
     }
 
-    /* Estilo para la imagen ampliada */
     .modal {
       display: none;
       position: fixed;
@@ -194,22 +193,18 @@
 </head>
 <body>
 
-<!-- LOGO -->
 <div class="logo-container">
-  <img src="v.jpg" alt="Logo Viterbos">
+  <img src="v.jpg">
 </div>
 
-<!-- NOMBRE -->
 <header>Viterbos</header>
 
-<!-- NAVBAR -->
 <nav>
   <button onclick="mostrar('pizzas')">Pizzas</button>
   <button onclick="mostrar('hamburguesas')">Hamburguesas</button>
   <button onclick="mostrar('extras')">Extras</button>
 </nav>
 
-<!-- SECCIONES -->
 <section id="pizzas">
   <h2>Pizzas</h2>
 
@@ -277,13 +272,11 @@
   </div>
 </section>
 
-<!-- Modal -->
 <div id="modal" class="modal">
   <span class="close" onclick="cerrarModal()">&times;</span>
   <img class="modal-content" id="img-modal">
 </div>
 
-<!-- SCRIPT -->
 <script>
   function mostrar(seccion) {
     document.getElementById('pizzas').style.display = 'none';
