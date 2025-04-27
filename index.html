@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Viterbos</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      color: #fff;
+      background: linear-gradient(#555, #333);
+      background-size: 400% 400%;
+      animation: fondoGris 10s ease infinite;
+      overflow-x: hidden;
+      text-align: center;
+    }
+
+    @keyframes fondoGris {
+      0% { background-color: #444; }
+      50% { background-color: #666; }
+      100% { background-color: #444; }
+    }
+
+    header {
+      padding: 20px 20px 10px;
+      font-size: 3em;
+      font-weight: bold;
+      letter-spacing: 5px;
+      color: gold;
+      opacity: 0;
+      animation: aparecer 2s forwards;
+      position: relative;
+    }
+
+    nav {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      background-color: gold;
+      padding: 20px;
+      border-radius: 10px;
+      opacity: 0;
+      animation: aparecer 2.5s forwards;
+      animation-delay: 1s;
+    }
+
+    @keyframes aparecer {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    nav button {
+      background-color: gold;
+      color: #000;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    nav button:hover {
+      background-color: #000;
+      color: gold;
+    }
+
+    .logo-container {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 10px;
+      opacity: 0;
+      animation: aparecer 2s forwards;
+    }
+
+    .logo-container img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
+    }
+
+    .logo-container:hover img {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px gold;
+    }
+
+    .tooltip {
+      visibility: hidden;
+      background-color: gold;
+      color: black;
+      text-align: center;
+      border-radius: 5px;
+      padding: 8px;
+      position: absolute;
+      z-index: 1;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-100%);
+      opacity: 0;
+      transition: opacity 0.5s;
+      font-size: 0.9em;
+      white-space: nowrap;
+    }
+
+    .logo-container:hover .tooltip {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    section {
+      display: none;
+      padding: 40px;
+      max-width: 1000px;
+      margin: 30px auto;
+    }
+
+    .producto {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      margin-bottom: 30px;
+      border-radius: 10px;
+    }
+
+    .producto img {
+      width: 100%;
+      height: auto;
+      max-height: 250px; /* Limita la altura máxima */
+      min-height: 200px; /* Limita la altura mínima */
+      object-fit: cover; /* Asegura que la imagen se ajuste sin distorsionarse */
+      border-radius: 10px;
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
+      cursor: pointer;
+    }
+
+    .producto img:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px gold;
+    }
+
+    section h2,
+    .producto h3,
+    .producto p {
+      color: gold;
+    }
+
+    /* Estilo para la imagen ampliada */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding-top: 60px;
+    }
+
+    .modal-content {
+      margin: auto;
+      display: block;
+      width: 80%;
+      max-width: 700px;
+    }
+
+    .modal-content:hover {
+      transform: scale(1.05);
+    }
+
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 35px;
+      color: #fff;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: gold;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<!-- LOGO -->
+<div class="logo-container">
+  <img src="viterbos.jpg" alt="Logo Viterbos">
+  <div class="tooltip">El mejor local para comer con la familia</div>
+</div>
+
+<!-- NOMBRE -->
+<header>Viterbos</header>
+
+<!-- NAVBAR -->
+<nav>
+  <button onclick="mostrar('pizzas')">Pizzas</button>
+  <button onclick="mostrar('hamburguesas')">Hamburguesas</button>
+  <button onclick="mostrar('extras')">Extras</button>
+</nav>
+
+<!-- SECCIONES -->
+<section id="pizzas">
+  <h2>Pizzas</h2>
+
+  <div class="producto">
+    <img src="p.jpg" alt="Pizza Gourmet" onclick="mostrarImagen(this)">
+    <h3>Pizza Gourmet</h3>
+    <p><strong>Precios:</strong> Chica $185 | Mediana $250 | Grande $310 | Familiar $370</p>
+    <p><strong>Especialidades:</strong> Marinera, Super Viterbo's, Pizza con Boneless</p>
+  </div>
+
+  <div class="producto">
+    <img src="p.jpg" alt="Ingredientes" onclick="mostrarImagen(this)">
+    <h3>Ingredientes Disponibles</h3>
+    <p>Jamón, Atún, Tocino, Pepperoni, Cebolla, Salchicha Italiana, Carne, Tomate, Champiñones, Jalapeño, Aceitunas, Piña, Chorizo, Salami, Elote, Pimiento Verde.</p>
+  </div>
+
+  <div class="producto">
+    <img src="p.jpg" alt="Especialidades" onclick="mostrarImagen(this)">
+    <h3>Especialidades</h3>
+    <p>Hawaiana, Vegetariana, Especial, Mexicana, Porky</p>
+  </div>
+</section>
+
+<section id="hamburguesas">
+  <h2>Hamburguesas</h2>
+
+  <div class="producto">
+    <img src="h.jpg" alt="Hamburguesa Sencilla" onclick="mostrarImagen(this)">
+    <h3>Hamburguesa Sencilla</h3>
+    <p>Carne, jamón, queso y verdura. Precio: $90.00</p>
+  </div>
+
+  <div class="producto">
+    <img src="h.jpg" alt="Hamburguesa Especial" onclick="mostrarImagen(this)">
+    <h3>Hamburguesa Especial</h3>
+    <p>Carne, jamón, queso, salami, tocino, verdura y papas. Precio: $120.00</p>
+  </div>
+
+  <div class="producto">
+    <img src="h.jpg" alt="Hamburguesa Crunchy" onclick="mostrarImagen(this)">
+    <h3>Hamburguesa Crunchy</h3>
+    <p>Carne, jamón, tocino, queso, aros de cebolla, dedos de queso, lechuga y aderezo. Precio: $150.00</p>
+  </div>
+</section>
+
+<section id="extras">
+  <h2>Extras</h2>
+
+  <div class="producto">
+    <img src="a.jpg" alt="Alitas" onclick="mostrarImagen(this)">
+    <h3>Alitas (300g)</h3>
+    <p>Acompañadas con apio, zanahoria, papas y aderezo. Precio: $125.00</p>
+  </div>
+
+  <div class="producto">
+    <img src="a.jpg" alt="Boneless" onclick="mostrarImagen(this)">
+    <h3>Boneless (300g)</h3>
+    <p>Incluyen apio, zanahoria, papas y aderezo. Precio: $130.00</p>
+  </div>
+
+  <div class="producto">
+    <img src="a.jpg" alt="Salsas y Verduras" onclick="mostrarImagen(this)">
+    <h3>Salsas y Verduras Extras</h3>
+    <p>Incluye: Salsas picantes, salsas dulces, aderezo ranch, aderezo búfalo, apio extra, zanahoria extra.</p>
+  </div>
+</section>
+
+<!-- Modal -->
+<div id="modal" class="modal">
+  <span class="close" onclick="cerrarModal()">&times;</span>
+  <img class="modal-content" id="img-modal">
+</div>
+
+<!-- SCRIPT -->
+<script>
+  function mostrar(seccion) {
+    document.getElementById('pizzas').style.display = 'none';
+    document.getElementById('hamburguesas').style.display = 'none';
+    document.getElementById('extras').style.display = 'none';
+    document.getElementById(seccion).style.display = 'block';
+  }
+
+  function mostrarImagen(imagen) {
+    var modal = document.getElementById('modal');
+    var modalImg = document.getElementById('img-modal');
+    modal.style.display = 'block';
+    modalImg.src = imagen.src;
+  }
+
+  function cerrarModal() {
+    var modal = document.getElementById('modal');
+    modal.style.display = 'none';
+  }
+</script>
+
+</body>
+</html>
